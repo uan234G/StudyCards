@@ -1,0 +1,12 @@
+@model FlashCard
+<a asp-action="Chapter" asp-route-ChId="@ViewBag.ChId"><button class="btn btn-primary">Back to Chapter</button></a>
+<br>
+<br>
+<br>
+<form asp-action="NewWordSubmit" asp-route-ChId="@ViewBag.ChId" asp-controller="home" method="POST">
+    <label>Term</label>
+    <input asp-for="Word">
+    <label>Definition</label>
+    <input asp-for="Definition">
+    <button type="submit">Submit</button>
+</form>

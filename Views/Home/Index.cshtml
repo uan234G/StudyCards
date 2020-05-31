@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Book>
+<style>
+    .container{
+        margin-left: 100px !important;
+        margin-right: 200px !important;
+    }
+    .grid-container{
+	display: grid;
+    grid-column-gap: 20px;
+	grid-template-columns: repeat(3, 1fr);
+    }
+    .bookcover{
+        	-webkit-transform: scale(1.5);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+    }
+    .bookcover:hover{
+        transform: scale(1.04);
+    }
+    .profileimg{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 20px;
+
+        object-fit: cover;
+        object-position: center right;
+    }
+    .header img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #555;
+    }
+
+    .header h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+    }
+    .bookcover{
+        height: 650px;
+        width: 470px;
+    }
+
+</style>
+
+<div>
+    <div class="header">
+        <img class="profileimg"  src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3376&q=80">
+        <h1 class="display-4">Welcome Miles Morales</h1>
+        <p><a href="https://google.com">Log Out</a></p>
+    </div>
+
+</div>
+<div style="margin-top: 60px;"></div>
+<div class="grid-container">
+    @foreach (var item in Model)
+    {
+        <a asp-action="Book" asp-route-Title="@item.Title" asp-controller="home">
+            <img class="bookcover" src="@item.ImageUrl">
+        </a>
+    }
+    <a asp-action="NewBook" class="newbook">
+        @* <img class="imgsize" src="https://i.pinimg.com/474x/a1/e4/f3/a1e4f30a16f232bef1f6f6b1f92ee74a--karl-book-covers.jpg"> *@
+        <p>+ New Book</p>
+    </a>
+</div>

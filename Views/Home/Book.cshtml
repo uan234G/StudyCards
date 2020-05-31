@@ -1,0 +1,66 @@
+@model Book
+<style>
+    .card-header{
+        background-color: slategrey;
+        color: white;
+    }
+    .hul{
+  width: 100%;
+  height: 620px;
+  overflow: scroll;
+}
+.row{
+    margin-left: 100px;
+}
+@* .card{
+    margin-left: 50px;
+} *@
+.col{
+    text-align: center;
+}
+.col img{
+    height: 620px;
+    width: 95%;
+}
+.col img:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+h1{
+    text-decoration: underline;
+}
+</style>
+<div style="text-align: center;">
+<h1>@Model.Title</h1>
+<small>By:</small><span>@Model.Author</span>
+</div>
+<h3 style="text-align: left;">Chapters:</h3>
+<div class="row">
+    <div class="col hul">
+        @foreach (var item in @Model.Chapters)
+        {
+            <div class="card" style="width: 18rem;">
+            <div class="card-header">
+            Ch: @item.ChNumber | @item.ChName
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Flashcards: @item.FlashCards.Count()</li>
+                    <li class="list-group-item"> <a asp-action="Study" asp-route-ChId="@item.ChapterId">Study Mode</a> </li>
+                    <li class="list-group-item"><a asp-action="Chapter" asp-route-ChId="@item.ChapterId">Details</a></li>
+                </ul>
+            </div>
+            <br>
+        }
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <a style="color: white;" asp-action="NewChapter" asp-route-BookId="@Model.BookId"><big>+</big> New Chapter</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <img src="@Model.ImageUrl" >
+    </div>
+</div>
+

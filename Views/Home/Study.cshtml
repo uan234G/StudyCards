@@ -1,0 +1,88 @@
+@model FlashCard
+
+<style>
+    @* body{
+        background-image: url('https://images.unsplash.com/photo-1532153955177-f59af40d6472?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80') !important;
+    }
+    .navbar{
+        background-color:rgba(0, 0, 0, 0) !important;
+    } *@
+    .card-container{
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+.scene {
+    width: 500px;
+    height: 300px;
+    border: 1px solid #CCC;
+    margin: 40px 0;
+    perspective: 600px;
+}
+
+.card {
+    background-color:rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+.card:hover{
+    border: 1px solid red;
+    transform: scale(1.2);
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-color:rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back {
+    color: white;
+    background: black;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    transform:rotateY(-180deg);
+}
+
+</style>
+<a asp-action="Chapter" asp-route-ChId="@Model.ChapterId"><button class="btn btn-primary">Back</button></a>
+<div class="card-container">
+    <div class="scene">
+        <div class="card">
+            <div class="card-face front"><h1>@Model.Word</h1></div>
+            <div class="card-face back">
+                <h1>@Model.Word</h1>
+                <hr>
+                <p>@Model.Definition</p>
+                <a asp-action="Complete" asp-route-fId="@Model.FlashCardId"><button class="btn btn-success">I Know It</button></a>
+                <a asp-action="Study" asp-route-ChId="@ViewBag.ChapterId"><button class="btn btn-danger" >Don't Know It</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var card = document.querySelector('.card');
+    card.addEventListener( 'click', function() {
+    card.classList.toggle('is-flipped');
+    });
+
+</script>

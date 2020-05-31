@@ -1,0 +1,11 @@
+@model Book
+
+<form asp-action="NewBookSubmit" asp-controller="home" method="POST">
+    <label>Book Title</label>
+    <input asp-for="Title">
+    <label>Book Author</label>
+    <input asp-for="Author">
+    <label >Book Cover</label>
+    <input asp-for="ImageUrl">
+    <button type="submit">Add Book</button>
+</form>

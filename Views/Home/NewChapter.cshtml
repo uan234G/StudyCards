@@ -1,0 +1,9 @@
+@model Chapter
+
+<form asp-action="ChapterSubmit" asp-route-BookId="@ViewBag.BookId" method="POST">
+    <label>Chapter #</label>
+    <input asp-for="ChNumber">
+    <label>Chapter Name</label>
+    <input asp-for="ChName">
+    <button type="submit">Add Chapter</button>
+</form>
